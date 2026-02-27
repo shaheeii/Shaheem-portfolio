@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #0d7ff2;
+  --color-background-dark: #101922;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-[#101922] text-slate-100;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
