@@ -9,11 +9,14 @@ export default function Footer() {
     <footer className="border-t border-slate-800 py-12 px-6 md:px-16 lg:px-40 bg-[#101922]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-3">
-          <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-primary bg-slate-900 shadow-sm shadow-primary/10">
-            <img
+          <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-primary bg-slate-800 shadow-sm shadow-primary/10">
+            <Image
               src="/profile.png"
               alt="Mohammed Shaheem"
-              className="w-full h-full object-cover"
+              fill
+              unoptimized
+              className="object-cover"
+              referrerPolicy="no-referrer"
             />
           </div>
           <span className="text-lg font-bold text-white tracking-tighter">SHAHEEM</span>
