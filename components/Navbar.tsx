@@ -56,6 +56,7 @@ export default function Navbar() {
               src="/profile.png"
               alt="Mohammed Shaheem"
               fill
+              priority
               className="object-cover transition-all duration-500"
               referrerPolicy="no-referrer"
             />

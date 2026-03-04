@@ -14,6 +14,7 @@ export default function Footer() {
               src="/profile.png"
               alt="Mohammed Shaheem"
               fill
+              priority
               className="object-cover"
               referrerPolicy="no-referrer"
             />

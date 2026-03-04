@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   title: 'Mohammed Shaheem | Designer. Developer. Artist',
   description: 'Premium visual identities that elevate ambitious brands through high-end strategic design.',
   icons: {
-    icon: '/profile.png',
+    icon: [
+      { url: '/profile.png' },
+      { url: '/profile.png', sizes: '32x32', type: 'image/png' },
+    ],
     shortcut: '/profile.png',
     apple: '/profile.png',
   },
