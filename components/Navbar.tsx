@@ -50,7 +50,7 @@ export default function Navbar() {
           <motion.div 
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.9, rotate: -5 }}
-            className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all"
+            className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary bg-slate-900 shadow-lg shadow-primary/20 transition-all"
           >
             <img
               src="/profile.png"

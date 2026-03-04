@@ -57,11 +57,11 @@ export default function Experience() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-black leading-tight tracking-tighter text-white mb-8"
+            className="text-5xl md:text-7xl font-black leading-tight tracking-tighter text-white mb-12"
           >
             Expertise & <br /><span className="text-primary">Experience</span>
           </motion.h2>
-          <p className="text-slate-400 text-lg md:text-xl max-w-2xl font-light">
+          <p className="text-slate-400 text-lg md:text-xl max-w-2xl font-light leading-relaxed">
             A curated showcase of core capabilities and the professional journey of Mohammed Shaheem. Crafting visual identities that leave a lasting impact.
           </p>
         </div>
@@ -94,9 +94,9 @@ export default function Experience() {
               />
               <div className="absolute inset-0 bg-black/60 group-hover:bg-primary/40 transition-colors duration-500" />
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <item.icon className="w-10 h-10 text-primary mb-4" />
-                <h3 className="text-white text-2xl font-bold leading-tight mb-2">{item.title}</h3>
-                <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <item.icon className="w-10 h-10 text-primary mb-6" />
+                <h3 className="text-white text-2xl font-bold leading-tight mb-4">{item.title}</h3>
+                <p className="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -115,22 +115,24 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`relative mb-16 md:flex items-center w-full ${
+              className={`relative mb-24 md:flex items-center w-full ${
                 index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               }`}
             >
-              <div className={`md:w-[45%] ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} mb-4 md:mb-0`}>
-                <h3 className="text-xl font-bold text-white">{item.role}</h3>
-                <p className="text-primary font-medium">{item.company}</p>
-                <p className="text-slate-500 text-sm">{item.period}</p>
+              <div className={`md:w-[45%] ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} mb-10 md:mb-0 space-y-4`}>
+                <div className="space-y-1">
+                  <h3 className="text-xl font-bold text-white">{item.role}</h3>
+                  <p className="text-primary font-medium tracking-wide">{item.company}</p>
+                </div>
+                <p className="text-slate-500 text-sm font-medium pt-2">{item.period}</p>
               </div>
               
               <div className="absolute left-0 md:left-1/2 top-1 md:top-auto size-4 rounded-full border-2 border-primary bg-[#101922] -translate-x-1/2 z-10">
                 <div className="absolute inset-1 bg-primary rounded-full" />
               </div>
               
-              <div className={`md:w-[45%] ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
-                <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
+              <div className={`md:w-[45%] ${index % 2 === 0 ? 'md:pl-16' : 'md:pr-16'}`}>
+                <p className="text-slate-400 text-sm leading-loose pt-6 md:pt-0">{item.description}</p>
               </div>
             </motion.div>
           ))}
