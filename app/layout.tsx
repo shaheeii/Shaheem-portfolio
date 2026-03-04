@@ -9,11 +9,13 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ais-dev-mxddi5rp2pdqndthvhmej7-443303831755.asia-southeast1.run.app'),
   title: 'Mohammed Shaheem | Designer. Developer. Artist',
   description: 'Premium visual identities that elevate ambitious brands through high-end strategic design.',
   icons: {
-    icon: '/profile.ico',
+    icon: [
+      { url: '/profile.ico', type: 'image/x-icon' },
+      { url: '/profile.png', type: 'image/png' },
+    ],
     shortcut: '/profile.ico',
     apple: '/profile.png',
   },

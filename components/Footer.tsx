@@ -10,13 +10,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-3">
           <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-white/10">
-            <Image
+            <img
               src="/profile.png"
               alt="Mohammed Shaheem"
-              fill
-              priority
-              className="object-cover"
-              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover"
             />
           </div>
           <span className="text-lg font-bold text-white tracking-tighter">SHAHEEM</span>

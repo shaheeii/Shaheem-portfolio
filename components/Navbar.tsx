@@ -52,13 +52,10 @@ export default function Navbar() {
             whileTap={{ scale: 0.9, rotate: -5 }}
             className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all"
           >
-            <Image
+            <img
               src="/profile.png"
               alt="Mohammed Shaheem"
-              fill
-              priority
-              className="object-cover transition-all duration-500"
-              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover transition-all duration-500"
             />
           </motion.div>
           <div className="flex flex-col">
