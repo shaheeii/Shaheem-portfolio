@@ -53,7 +53,7 @@ export default function Navbar() {
             className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all"
           >
             <img
-              src="/profile.ico"
+              src="/profile.png"
               alt="Mohammed Shaheem"
               className="w-full h-full object-cover transition-all duration-500"
             />

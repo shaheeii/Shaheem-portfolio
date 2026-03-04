@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   title: 'Mohammed Shaheem | Designer. Developer. Artist',
   description: 'Premium visual identities that elevate ambitious brands through high-end strategic design.',
   icons: {
-    icon: '/profile.ico',
-    shortcut: '/profile.ico',
+    icon: '/profile.png',
+    shortcut: '/profile.png',
     apple: '/profile.png',
   },
 };

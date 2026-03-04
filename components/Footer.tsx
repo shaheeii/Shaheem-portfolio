@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex items-center gap-3">
           <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-white/10">
             <img
-              src="/profile.ico"
+              src="/profile.png"
               alt="Mohammed Shaheem"
               className="w-full h-full object-cover"
             />
