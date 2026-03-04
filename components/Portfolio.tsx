@@ -90,24 +90,39 @@ export default function Portfolio() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 50, rotateX: 10 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.4 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  rotate: 1,
+                  boxShadow: "0px 20px 40px rgba(0,0,0,0.4)",
+                  zIndex: 10
+                }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 20 
+                }}
                 className={`group relative overflow-hidden rounded-xl cursor-pointer bg-slate-900 ${project.span}`}
+                style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
               >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
+                <div className="relative h-full w-full overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#101922]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute bottom-0 left-0 p-8 md:p-12 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                   <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase mb-2 block">

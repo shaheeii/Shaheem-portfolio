@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Linkedin, Github, Twitter, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Twitter, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import Image from 'next/image';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -34,6 +34,14 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 );
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const socials = [
     { icon: Linkedin, href: 'https://www.linkedin.com/in/shaheeii' },
     { icon: InstagramIcon, href: 'https://www.instagram.com/shaheeiiiii?igsh=MTMyOXhiYnJnMWFoYg==', color: 'hover:bg-[#E4405F] hover:border-[#E4405F]' },
@@ -41,6 +49,48 @@ export default function Contact() {
     { icon: Github, href: 'https://github.com/shaheeii' },
     { icon: Twitter, href: '#' },
   ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Fallback to mailto if the service is not configured or key is invalid
+        const isConfigError = data.error?.toLowerCase().includes('not configured') || 
+                             data.error?.toLowerCase().includes('invalid');
+        
+        if (isConfigError) {
+          const subject = encodeURIComponent(`New Portfolio Message from ${formData.name}`);
+          const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+          const mailtoLink = `mailto:shaheeiipv@gmail.com?subject=${subject}&body=${body}`;
+          
+          window.location.href = mailtoLink;
+          setStatus('success');
+          setFormData({ name: '', email: '', message: '' });
+          return;
+        }
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (err: any) {
+      console.error(err);
+      setStatus('error');
+      setErrorMessage(err.message || 'Something went wrong. Please try again.');
+    }
+  };
 
   return (
     <section id="contact" className="py-24 lg:py-40 px-6 md:px-16 lg:px-40 bg-[#101922]">
@@ -114,11 +164,14 @@ export default function Contact() {
             viewport={{ once: true }}
             className="bg-slate-900/50 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-bold uppercase tracking-widest text-slate-500 mb-2">Full Name</label>
                 <input
                   type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="John Doe"
                   className="w-full bg-slate-800/50 border-none rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary text-white placeholder-slate-500"
                   suppressHydrationWarning
@@ -128,6 +181,9 @@ export default function Contact() {
                 <label className="block text-sm font-bold uppercase tracking-widest text-slate-500 mb-2">Email Address</label>
                 <input
                   type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="john@example.com"
                   className="w-full bg-slate-800/50 border-none rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary text-white placeholder-slate-500"
                   suppressHydrationWarning
@@ -136,20 +192,57 @@ export default function Contact() {
               <div>
                 <label className="block text-sm font-bold uppercase tracking-widest text-slate-500 mb-2">Project Details</label>
                 <textarea
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell me about your vision..."
                   rows={5}
                   className="w-full bg-slate-800/50 border-none rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary text-white placeholder-slate-500"
                   suppressHydrationWarning
                 />
               </div>
+              
+              {status === 'success' && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center gap-3"
+                >
+                  <CheckCircle2 className="w-5 h-5" />
+                  <p className="text-sm font-medium">Message sent successfully! I&apos;ll get back to you soon.</p>
+                </motion.div>
+              )}
+
+              {status === 'error' && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 flex items-center gap-3"
+                >
+                  <AlertCircle className="w-5 h-5" />
+                  <p className="text-sm font-medium">{errorMessage}</p>
+                </motion.div>
+              )}
+
               <motion.button 
+                type="submit"
+                disabled={status === 'loading'}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.9, rotate: 1 }}
-                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-5 rounded-xl transition-all shadow-xl shadow-primary/30 text-lg flex items-center justify-center gap-2 group"
+                className="w-full bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-5 rounded-xl transition-all shadow-xl shadow-primary/30 text-lg flex items-center justify-center gap-2 group"
                 suppressHydrationWarning
               >
-                Send Message
-                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {status === 'loading' ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </motion.button>
               <p className="text-center text-xs text-slate-500">I usually respond within 24 hours.</p>
             </form>

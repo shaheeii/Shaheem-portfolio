@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 import { Layout, Sparkles, Megaphone } from 'lucide-react';
 
 const capabilities = [
@@ -70,15 +71,26 @@ export default function Experience() {
           {capabilities.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="relative group overflow-hidden rounded-xl aspect-[4/5] cursor-pointer bg-slate-800"
+              initial={{ opacity: 0, y: 50, rotateX: 15, rotateY: -5 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              whileHover={{ 
+                scale: 1.05, 
+                rotateY: 5,
+                z: 20,
+                transition: { duration: 0.3 } 
+              }}
+              className="relative group overflow-hidden rounded-xl aspect-[4/5] cursor-pointer bg-slate-800 perspective-1000"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{ backgroundImage: `url(${item.image})` }}
+              <Image 
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-black/60 group-hover:bg-primary/40 transition-colors duration-500" />
               <div className="absolute inset-0 p-8 flex flex-col justify-end">

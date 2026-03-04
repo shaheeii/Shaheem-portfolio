@@ -8,6 +8,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply antialiased bg-[#101922] text-slate-100;
   }

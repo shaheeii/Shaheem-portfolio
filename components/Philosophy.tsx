@@ -29,7 +29,7 @@ const cards = [
 
 export default function Philosophy() {
   return (
-    <section id="brand-strategy" className="py-24 lg:py-40 px-6 md:px-16 lg:px-40 bg-[#101922] border-t border-slate-200/5">
+    <section id="about" className="py-24 lg:py-40 px-6 md:px-16 lg:px-40 bg-[#101922] border-t border-slate-200/5">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
           {/* Left Column */}
@@ -40,7 +40,7 @@ export default function Philosophy() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-6">Brand Strategy</h2>
+              <h2 className="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-6">Designer. Developer. Artist</h2>
               <h3 className="text-4xl md:text-5xl font-bold leading-tight mb-8 text-white">Strategic Design Approach</h3>
               <p className="text-slate-400 text-lg leading-relaxed mb-10">
                 Founder of <span className="text-white font-medium">Creopix Designs</span> with 3+ years of experience in luxury brand positioning. My work bridges the gap between commercial objectives and artistic excellence.
@@ -60,11 +60,18 @@ export default function Philosophy() {
               {cards.map((card, index) => (
                 <motion.div
                   key={card.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group p-8 rounded-xl border border-slate-800 bg-slate-900/30 hover:bg-primary/5 hover:border-primary/30 transition-all"
+                  initial={{ opacity: 0, y: 30, rotateX: 20, rotateY: 10 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    rotateX: -5, 
+                    rotateY: 5,
+                    transition: { duration: 0.2 } 
+                  }}
+                  className="group p-8 rounded-xl border border-slate-800 bg-slate-900/30 hover:bg-primary/5 hover:border-primary/30 transition-all perspective-1000"
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
                   <div className="mb-6 flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
                     <card.icon className="w-6 h-6" />

@@ -62,18 +62,23 @@ export default function Navbar() {
           </motion.div>
           <div className="flex flex-col">
             <span className="text-lg font-black tracking-tighter leading-none text-white">SHAHEEM</span>
-            <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Brand Strategy</span>
+            <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">Designer. Developer. Artist</span>
           </div>
         </Link>
         
         <nav className="hidden md:flex items-center gap-12">
-          {['Work', 'Brand Strategy', 'Services', 'Contact'].map((item) => (
+          {[
+            { label: 'Work', href: '#work' },
+            { label: 'About', href: '#about' },
+            { label: 'Services', href: '#services' },
+            { label: 'Contact', href: '#contact' }
+          ].map((item) => (
             <Link
-              key={item}
-              href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+              key={item.label}
+              href={item.href}
               className="text-sm font-medium text-slate-400 hover:text-primary transition-colors"
             >
-              {item}
+              {item.label}
             </Link>
           ))}
           
@@ -96,14 +101,16 @@ export default function Navbar() {
           </div>
         </nav>
 
-        <motion.button
-          whileHover={{ scale: 1.02, y: -2 }}
-          whileTap={{ scale: 0.9, rotate: -1 }}
-          className="bg-primary hover:bg-primary/90 text-white rounded-lg px-6 py-2.5 text-sm font-bold transition-all shadow-lg shadow-primary/20"
-          suppressHydrationWarning
-        >
-          Start a Project
-        </motion.button>
+        <Link href="#contact">
+          <motion.button
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.9, rotate: -1 }}
+            className="bg-primary hover:bg-primary/90 text-white rounded-lg px-6 py-2.5 text-sm font-bold transition-all shadow-lg shadow-primary/20"
+            suppressHydrationWarning
+          >
+            Start a Project
+          </motion.button>
+        </Link>
       </div>
     </header>
   );
